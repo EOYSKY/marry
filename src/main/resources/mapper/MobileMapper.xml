@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtm.party.mobile.dao.MobileMapper">
+    <select id="getHomeImg" resultType="com.mtm.party.mobile.model.HomeImgEntity">
+        select
+        c.id as id,
+        c.code as code,
+        c.img_url as imgUrl,
+        c.title as title,
+        c.user_open_id as userOpenId,
+        c.desc as `desc`,
+        c.create_time as createTime,
+        c.update_time as updateTime
+        FROM image_info c
+        order by c.create_time desc
+    </select>
+    <select id="getDetailImage" parameterType="java.lang.String" resultType="com.mtm.party.mobile.model.ImgDetailEntity">
+        select
+        c.id as id,
+        c.code as code,
+        c.img_url as imgUrl,
+        c.banner_code as bannerCode,
+        c.user_open_id as userOpenId,
+        c.desc as `desc`,
+        c.create_time as createTime,
+        c.update_time as updateTime
+        FROM image_detail_info c
+        where
+        c.banner_code=#{id}
+        order by c.create_time desc
+    </select>
+    <select id="getblessInfo" resultType="com.mtm.party.mobile.model.BlessInfoDto">
+        SELECT
+        a.bless_user as blessUser, -- 点赞人openid
+        a.create_time as createTime, -- 点赞时间
+        b.avatar_url as avatarUrl, -- 点赞人头像地址
+        b.nick_name as nickName, -- 点赞人昵称
+        b.province as province, -- 点赞人省份
+        b.city as city -- 点赞人城市
+        FROM
+            `bless_info` a
+        LEFT JOIN user_info b on a.bless_user = b.open_id
+        order by a.create_time desc
+    </select>
+    <select id="getcomment" resultType="com.mtm.party.mobile.model.CommentDto">
+        SELECT
+        a.comment_user as userOpenId,
+        a.`comment` as `comment`,
+        a.create_time as createTime,
+        b.nick_name as nickName,
+        b.province as province,
+        b.city as city,
+        b.avatar_url as avatarUrl
+        FROM
+            `comment_info` a
+        LEFT JOIN user_info b on b.open_id = a.comment_user
+        ORDER BY a.create_time desc
+    </select>
+    <select id="check" resultType="java.lang.Integer">
+        SELECT
+        count(id)
+        from bless_info
+        where
+        bless_user = #{openId}
+    </select>
+    <select id="checkAdmin" resultType="java.lang.Integer">
+        SELECT
+        count(id)
+        from user_admin_info
+        where
+        open_id = #{openId}
+    </select>
+    <select id="getMapInfo" resultType="java.util.Map">
+        SELECT
+        name_title as nameTitle,
+        solar_calendar as solarCalendar,
+        lunar_calendar as lunarCalendar,
+        address as address,
+        longitude as longitude,
+        latitude as latitude,
+        bg_img_url as bgImgUrl
+        from map_info
+        where
+        del = 0
+    </select>
+    <insert id="doComment" parameterType="com.mtm.party.mobile.model.CommentDto">
+        insert into comment_info(
+        comment_user,
+        comment,
+        create_time
+        )values (
+        #{userOpenId},
+        #{comment},
+        now()
+        )
+    </insert>
+    <insert id="doPraise" parameterType="java.lang.String">
+        insert into bless_info(
+        bless_user,
+        create_time
+        )values (
+        #{openId},
+        now()
+        )
+    </insert>
+    <insert id="saveHomeImg" parameterType="com.mtm.party.mobile.model.HomeImgEntity">
+        insert into image_info(
+        code,
+        img_url,
+        title,
+        user_open_id,
+        create_time,
+        update_time
+        )values (
+        #{code},
+        #{imgUrl},
+        #{title},
+        #{userOpenId},
+        now(),
+        now()
+        )
+    </insert>
+    <insert id="saveImgDetail" parameterType="com.mtm.party.mobile.model.ImgDetailEntity">
+        insert into image_detail_info(
+        code,
+        img_url,
+        user_open_id,
+        banner_code,
+        create_time,
+        update_time
+        )values (
+        #{code},
+        #{imgUrl},
+        #{userOpenId},
+        #{bannerCode},
+        now(),
+        now()
+        )
+    </insert>
+    <update id="updateDesc" parameterType="com.mtm.party.mobile.model.ImgDetailEntity">
+        update image_detail_info set
+        `desc` = #{desc}
+        where code = #{code}
+    </update>
+</mapper>
