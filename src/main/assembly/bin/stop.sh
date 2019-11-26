@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # 需要配置=======================
-BASE_DIR=/opt/service/marry-restructure-0.0.1-SNAPSHOT
+BASE_DIR=/opt/service/marry-0.0.1-SNAPSHOT
 # 服务英文名称，用于显示
-SERVICE_NAME=marryRestructureService
+SERVICE_NAME=marry-service
 # ===============================
 PID_FILE=${BASE_DIR}/pid/${SERVICE_NAME}.pid
 PID=`cat ${PID_FILE}`

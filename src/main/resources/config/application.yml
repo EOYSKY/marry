@@ -6,7 +6,7 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 8090
+  port: 8080
   context-path: /marryService
   #ssl:
   #key-store: classpath:keystore.p12
@@ -14,6 +14,8 @@ server:
   #keyStoreType: PKCS12
   #keyAlias: tomcat
 
+
+BASE_DIR:
 
 # mybatis 配置
 mybatis:
@@ -58,7 +60,7 @@ response:
     allowHeaders: x-requested-with,content-type
     characterEncoding: utf-8
 service:
-  imgUploadPath: ~/marry/picture
+  imgUploadPath: /data/wwwroot/marryserver/uploadimages
   #  上传后，通过Tomcat可访问的网络路径
   imgNetPath: http://47.99.172.232:8080/images/
 #  imgUploadPath: /usr/local/tools/apache-tomcat-8.5.43/webapps/ROOT/images/

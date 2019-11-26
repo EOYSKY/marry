@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mtm.party.mobile.dao.UserMapper">
-    <insert id="saveRecord" parameterType="com.mtm.party.mobile.model.UserInfo">
+<mapper namespace="com.cn.jonny.love.marry.mobile.dao.UserMapper">
+    <insert id="saveRecord" parameterType="com.cn.jonny.love.marry.mobile.model.UserInfo">
         insert into user_record_info(
         user_open_id,
         create_time
@@ -13,7 +13,7 @@
         now()
         )
     </insert>
-    <insert id="saveUserInfo" parameterType="com.mtm.party.mobile.model.UserEntity">
+    <insert id="saveUserInfo" parameterType="com.cn.jonny.love.marry.mobile.model.UserEntity">
         insert into user_info(
         open_id,
         avatar_url,
@@ -34,7 +34,7 @@
         now()
         )
     </insert>
-    <select id="getUserByOpenId" parameterType="java.lang.String" resultType="com.mtm.party.mobile.model.UserEntity">
+    <select id="getUserByOpenId" parameterType="java.lang.String" resultType="com.cn.jonny.love.marry.mobile.model.UserEntity">
         select
          id,
          open_id as openId,
@@ -46,7 +46,7 @@
          update_time as updateTime
          from user_info  where open_id=#{openId}
     </select>
-    <update id="updateUserInfo" parameterType="com.mtm.party.mobile.model.UserEntity">
+    <update id="updateUserInfo" parameterType="com.cn.jonny.love.marry.mobile.model.UserEntity">
         update user_info set
         open_id=#{openId},
         avatar_url=#{avatarUrl},

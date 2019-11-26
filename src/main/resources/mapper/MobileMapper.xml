@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mtm.party.mobile.dao.MobileMapper">
-    <select id="getHomeImg" resultType="com.mtm.party.mobile.model.HomeImgEntity">
+<mapper namespace="com.cn.jonny.love.marry.mobile.dao.MobileMapper">
+    <select id="getHomeImg" resultType="com.cn.jonny.love.marry.mobile.model.HomeImgEntity">
         select
         c.id as id,
         c.code as code,
@@ -15,7 +15,7 @@
         FROM image_info c
         order by c.create_time desc
     </select>
-    <select id="getDetailImage" parameterType="java.lang.String" resultType="com.mtm.party.mobile.model.ImgDetailEntity">
+    <select id="getDetailImage" parameterType="java.lang.String" resultType="com.cn.jonny.love.marry.mobile.model.ImgDetailEntity">
         select
         c.id as id,
         c.code as code,
@@ -30,7 +30,7 @@
         c.banner_code=#{id}
         order by c.create_time desc
     </select>
-    <select id="getblessInfo" resultType="com.mtm.party.mobile.model.BlessInfoDto">
+    <select id="getblessInfo" resultType="com.cn.jonny.love.marry.mobile.model.BlessInfoDto">
         SELECT
         a.bless_user as blessUser, -- 点赞人openid
         a.create_time as createTime, -- 点赞时间
@@ -43,7 +43,7 @@
         LEFT JOIN user_info b on a.bless_user = b.open_id
         order by a.create_time desc
     </select>
-    <select id="getcomment" resultType="com.mtm.party.mobile.model.CommentDto">
+    <select id="getcomment" resultType="com.cn.jonny.love.marry.mobile.model.CommentDto">
         SELECT
         a.comment_user as userOpenId,
         a.`comment` as `comment`,
@@ -84,7 +84,7 @@
         where
         del = 0
     </select>
-    <insert id="doComment" parameterType="com.mtm.party.mobile.model.CommentDto">
+    <insert id="doComment" parameterType="com.cn.jonny.love.marry.mobile.model.CommentDto">
         insert into comment_info(
         comment_user,
         comment,
@@ -104,7 +104,7 @@
         now()
         )
     </insert>
-    <insert id="saveHomeImg" parameterType="com.mtm.party.mobile.model.HomeImgEntity">
+    <insert id="saveHomeImg" parameterType="com.cn.jonny.love.marry.mobile.model.HomeImgEntity">
         insert into image_info(
         code,
         img_url,
@@ -121,7 +121,7 @@
         now()
         )
     </insert>
-    <insert id="saveImgDetail" parameterType="com.mtm.party.mobile.model.ImgDetailEntity">
+    <insert id="saveImgDetail" parameterType="com.cn.jonny.love.marry.mobile.model.ImgDetailEntity">
         insert into image_detail_info(
         code,
         img_url,
@@ -138,7 +138,7 @@
         now()
         )
     </insert>
-    <update id="updateDesc" parameterType="com.mtm.party.mobile.model.ImgDetailEntity">
+    <update id="updateDesc" parameterType="com.cn.jonny.love.marry.mobile.model.ImgDetailEntity">
         update image_detail_info set
         `desc` = #{desc}
         where code = #{code}

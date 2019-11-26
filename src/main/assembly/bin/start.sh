@@ -1,12 +1,12 @@
 #!/bin/sh
 # 需要配置=======================
-export JAVA_HOME=/opt/java/java8
+export JAVA_HOME=/usr/java/default
 # 应用程序JAR包名称
-JAR_NAME=marry-restructure-0.0.1-SNAPSHOT.jar
+JAR_NAME=marry-0.0.1-SNAPSHOT.jar
 # 应用程序包绝对目录
-BASE_DIR=/opt/service/marry-restructure-0.0.1-SNAPSHOT
+BASE_DIR=/data/wwwroot/marryserver/marry-0.0.1-SNAPSHOT
 # 服务英文名称，用于显示
-SERVICE_NAME=marryRestructureService
+SERVICE_NAME=marry-service
 # ===============================
 
 # 可执行程序完整路径
